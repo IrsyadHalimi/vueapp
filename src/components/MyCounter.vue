@@ -1,21 +1,9 @@
 <script setup>
-import { customRef } from "vue";
+import useMaximum from "../composables/useMaximum.js";
 
 const maximum = 10;
 
-const count = customRef((track, trigger) => {
-  let value = 0;
-  return {
-    get() {
-      track();
-      return value;
-    },
-    set(newValue) {
-      if (newValue <= maximum) value = newValue;
-      trigger();
-    }
-  };
-});
+const count = useMaximum(maximum);
 
 function increment() {
   count.value += 1;
