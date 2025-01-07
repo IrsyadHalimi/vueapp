@@ -1,32 +1,38 @@
 <script setup>
 import { customRef } from "vue";
 
+const maximum = 10;
+
 const count = customRef((track, trigger) => {
   let value = 0;
   return {
     get() {
       track();
-      console.log("get value =", value);
       return value;
     },
     set(newValue) {
-      value = newValue;
+      if (newValue <= maximum) value = newValue;
       trigger();
-      console.log("set value =", value);
     }
   };
 });
 
 function increment() {
-  console.log("before increment value");
   count.value += 1;
-  console.log("after increment value");
+}
+
+function decrement() {
+  count.value -= 1;
 }
 
 </script>
 <template>
   <h3>MyCounter Component</h3>
   Reactive variable count: <b>{{ count }}</b>
-  <br />
-  <button @click="increment">Count + 1</button>
+  <br><br>
+  Maximum: <b>{{ maximum }}</b>
+  <br><br>
+  <button @click="increment">count + 1</button>
+  &nbsp;
+  <button @click="decrement">count - 1</button>
 </template>
