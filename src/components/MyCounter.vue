@@ -1,36 +1,22 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 
 const count = ref(0);
-const message = ref("");
+const props = defineProps(['index']);
+const index = props.index || 1;
 
-const verifyKey = () => {
-    const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    const moves = ["Backspace", "ArrowLeft", "ArrowRight", "Delete", "Tab", "Home", "End"];
-    let authorized;
-    authorized = [...numbers, ...moves];
-    if (!authorized.includes(event.key)) event.preventDefault()
-}
+const emit = defineEmits(['incr']);
 
-const verifyMax100 = () => {
-    message.value = "";
-    if (parseInt(event.target.value) > 100) message.value = "Do not exceed 100!";
-}
-
-const eraseField = () => {
-    event.target.value = "";
-    count.value = "";
-    message.value = "";
+const increment = () => {
+    count.value++;
+    emit('incr', 1);
 }
 </script>
 
 <template>
-  <h3>MyCounter Component</h3>
-  Reactive variable count: <input type="text" v-model="count" @keydown="verifyKey()"
-  @input="verifyMax100()"
-  @focus="eraseField()"/>
+  <h3>{{ index }} - MyCounter Component</h3>
+  Reactive variable count: <b>{{ count }}</b>
   <br/><br/>
-  Entered value: <b>{{ count }}</b>
-  <br/><br/>
-  message: <b>{{ message }}</b>
+  <button @click="increment()">count+1</button>
+  <br>
 </template>

@@ -1,9 +1,9 @@
 <script setup>
-import MyCounter from './components/MyCounter.vue';
+import MyCounters from './components/MyCounters.vue';
 </script>
 
 <template>
-  <MyCounter />
+  <MyCounters :nb="3" />
 </template>
 
 <style scoped>
