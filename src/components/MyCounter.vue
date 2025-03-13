@@ -1,15 +1,15 @@
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref, defineProps, inject } from 'vue';
 
 const count = ref(0);
 const props = defineProps(['index']);
 const index = props.index || 1;
 
-const emit = defineEmits(['incr']);
+const total = inject('total');
 
 const increment = () => {
     count.value++;
-    emit('incr', 1);
+    total.value++;
 }
 </script>
 
