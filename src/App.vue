@@ -1,9 +1,9 @@
 <script setup>
-import MyForm from './components/MyForm.vue';
+import MyCounter from './components/MyCounter.vue';
 </script>
 
 <template>
-  <MyForm />
+  <MyCounter />
 </template>
 
 <style scoped>
