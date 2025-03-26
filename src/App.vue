@@ -1,16 +1,14 @@
 <script setup>
-import MyCounters from './components/MyCounters.vue';
-import { ref, provide } from 'vue';
+import MyCountries from './components/MyCountries.vue';
+import { ref } from 'vue';
 
-const total = ref(0);
-
-provide('total', total);
+const name = ref("");
 </script>
 
 <template>
-  <MyCounters :nb="3" />
-  <br/><hr/><br/>
-  Overall Total: <b>{{ total }}</b>
+  <b>Country</b>: <input type="text" v-model="name">
+  <br>
+  <MyCountries :name="name"/>
 </template>
 
 <style scoped>
