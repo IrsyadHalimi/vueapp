@@ -1,10 +1,11 @@
 <script setup>
-import { defineProps, ref, onMounted, watchEffect } from 'vue';
-const props = defineProps(['name']);
+import { ref, onMounted, watch, inject } from 'vue';
 
 const names = ref([]);
 
 let countries = [];
+
+const name = inject("name");
 
 onMounted(() => {
     var url = "https://restcountries.com/v3.1/all";
@@ -24,10 +25,9 @@ onMounted(() => {
     .catch((err) => names.value = [err.toString()]);
 });
 
-watchEffect(() => {
-    console.log(props.name);
+watch(name, () => {
     let countriesFiltered = countries.filter((n) => {
-        const reg = new RegExp("^" + props.name, "i");
+        const reg = new RegExp("^" + name.value, "i");
         if (n.match(reg)) return true;
         else return false;
     });
