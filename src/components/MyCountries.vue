@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, onMounted, watch } from 'vue';
+import { defineProps, ref, onMounted, watchEffect } from 'vue';
 const props = defineProps(['name']);
 
 const names = ref([]);
@@ -24,9 +24,10 @@ onMounted(() => {
     .catch((err) => names.value = [err.toString()]);
 });
 
-watch(()=>props.name, (newName) => {
+watchEffect(() => {
+    console.log(props.name);
     let countriesFiltered = countries.filter((n) => {
-        const reg = new RegExp("^" + newName, "i");
+        const reg = new RegExp("^" + props.name, "i");
         if (n.match(reg)) return true;
         else return false;
     });
